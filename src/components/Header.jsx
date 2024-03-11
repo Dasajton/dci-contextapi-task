@@ -1,8 +1,10 @@
 import logo from "../assets/logo.svg";
 import Cart from "./Cart.jsx";
+import store from "../context/CartContext.jsx";
 
-const Header = ({ cart, onUpdateCartItemQuantity }) => {
-  const cartQuantity = cart.items.length;
+const Header = () => {
+  const { shoppingCart } = store();
+  const cartQuantity = shoppingCart.items.length;
 
   function handleModalOpen() {
     document.getElementById("cart-modal").showModal();
@@ -25,7 +27,8 @@ const Header = ({ cart, onUpdateCartItemQuantity }) => {
           <div className="indicator">
             <button
               onClick={handleModalOpen}
-              className="btn text-lg bg-fuchsia-300  font-bold">
+              className="btn text-lg bg-fuchsia-300  font-bold"
+            >
               Cart
               {cartQuantity > 0 && (
                 <span class="indicator-item badge badge-success text-white">
@@ -44,10 +47,7 @@ const Header = ({ cart, onUpdateCartItemQuantity }) => {
           <h3 className="font-bold text-fuchsia-800 text-2xl mb-6">
             Your Cart
           </h3>
-          <Cart
-            items={cart.items}
-            onUpdateItemQuantity={onUpdateCartItemQuantity}
-          />
+          <Cart />
           <div className="modal-action">
             <form method="dialog" className="flex gap-5">
               {cartQuantity > 0 && (
